@@ -21,6 +21,7 @@ celery = "^5.4.0"
 redis = "^5.0.7"
 gevent = "^24.2.1"
 django-celery-beat = "^2.6.0"
+coverage = "^7.5.4"
 
 
 [build-system]
