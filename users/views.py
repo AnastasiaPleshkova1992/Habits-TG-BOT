@@ -1,4 +1,10 @@
-from rest_framework.generics import CreateAPIView, ListAPIView, RetrieveAPIView, DestroyAPIView, UpdateAPIView
+from rest_framework.generics import (
+    CreateAPIView,
+    ListAPIView,
+    RetrieveAPIView,
+    DestroyAPIView,
+    UpdateAPIView,
+)
 from rest_framework.permissions import AllowAny
 
 from users.models import User

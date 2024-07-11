@@ -66,24 +66,24 @@ class HabitTestCase(APITestCase):
 
     def test_habit_retrieve(self):
         """Test that retrieve returns correct data"""
-        url = reverse('habits:habit_retrieve', args=(self.habit.pk,))
+        url = reverse("habits:habit_retrieve", args=(self.habit.pk,))
         response = self.client.get(url)
         data = response.json()
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(data['place'], self.habit.place)
+        self.assertEqual(data["place"], self.habit.place)
 
     def test_habit_update(self):
         """Test that works update habits"""
-        url = reverse('habits:habit_update', args=(self.habit.pk,))
+        url = reverse("habits:habit_update", args=(self.habit.pk,))
         data = {
-            'action': 'Побегать на дорожке',
+            "action": "Побегать на дорожке",
         }
-        response = self.client.patch(url, data, format='json')
+        response = self.client.patch(url, data, format="json")
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(data['action'], 'Побегать на дорожке')
+        self.assertEqual(data["action"], "Побегать на дорожке")
 
     def test_habit_delete(self):
-        url = reverse('habits:habit_delete', args=(self.habit.pk,))
+        url = reverse("habits:habit_delete", args=(self.habit.pk,))
         response = self.client.delete(url)
         self.assertEqual(response.status_code, status.HTTP_204_NO_CONTENT)
         self.assertEqual(Habit.objects.count(), 0)

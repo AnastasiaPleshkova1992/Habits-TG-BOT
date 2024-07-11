@@ -9,6 +9,7 @@ NULLABLE = {"blank": True, "null": True}
 
 class Habit(models.Model):
     """Model for habit"""
+
     owner = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -20,9 +21,9 @@ class Habit(models.Model):
         verbose_name="Место выполнения привычки",
         help_text="Укажите место выполнения привычки",
     )
-    time = models.TimeField(
-        verbose_name="Время выполнения привычки",
-        help_text="Укажите время выполнения привычки",
+    time = models.DateTimeField(
+        verbose_name="Дата и время страта выполнения привычки",
+        help_text="Укажите дату и время выполнения привычки",
     )
     action = models.CharField(
         max_length=200,
@@ -44,7 +45,8 @@ class Habit(models.Model):
     periodicity = models.SmallIntegerField(
         default=1,
         verbose_name="Периодичность выполнения привычки",
-        help_text="Укажите периодичность от 1 до 7, где 1 - один раз в неделю, а 7 - это каждый день",
+        help_text="Укажите периодичность от 1 до 7, "
+        "где 1 - один раз в неделю, а 7 - это каждый день.",
     )
     reward = models.CharField(
         max_length=200,
