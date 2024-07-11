@@ -23,7 +23,7 @@ class TimeDurationValidator:
 
     def __call__(self, habit):
         max_duration = timedelta(seconds=120)
-        if habit.get(self.duration) > max_duration:
+        if habit.get(self.duration) and habit.get(self.duration) > max_duration:
             raise ValidationError(
                 f'Длительность выполнения привычки не может превышать {max_duration}.'
             )

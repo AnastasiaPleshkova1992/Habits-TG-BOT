@@ -11,7 +11,7 @@ class Habit(models.Model):
     """Model for habit"""
 
     period = [("weekly", "еженедельно"), ("daily", "ежедневно")]
-    user = models.ForeignKey(
+    owner = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         verbose_name="Создатель привычки",
@@ -68,7 +68,7 @@ class Habit(models.Model):
     )
 
     def __str__(self):
-        return f"{self.user} будет {self.action} в {self.time} в {self.place}"
+        return f"{self.owner} будет {self.action} в {self.time} в {self.place}"
 
     class Meta:
         verbose_name = "Привычка"

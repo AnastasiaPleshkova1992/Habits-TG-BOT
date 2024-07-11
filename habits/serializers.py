@@ -2,15 +2,18 @@ from rest_framework import serializers
 
 from habits.models import Habit
 from habits.validators import EliminationChoiceValidator, TimeDurationValidator, CombinationValidator, AbsenceValidator
+from users.serializers import UserSerializer
 
 
-class HabitSerializers(serializers.ModelSerializer):
+class HabitSerializer(serializers.ModelSerializer):
+    user = UserSerializer(read_only=True)
+
     class Meta:
         model = Habit
-        fields = ('__all__',)
+        fields = '__all__'
         validators = [
             EliminationChoiceValidator('related_habit', 'reward'),
-            TimeDurationValidator('time_duration'),
+            TimeDurationValidator('duration'),
             CombinationValidator('related_habit', 'pleasant_habit_sign'),
             AbsenceValidator('reward', 'related_habit', 'pleasant_habit_sign'),
         ]
