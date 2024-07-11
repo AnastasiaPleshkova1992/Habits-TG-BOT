@@ -9,8 +9,6 @@ NULLABLE = {"blank": True, "null": True}
 
 class Habit(models.Model):
     """Model for habit"""
-
-    period = [("weekly", "еженедельно"), ("daily", "ежедневно")]
     owner = models.ForeignKey(
         to=settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -43,12 +41,10 @@ class Habit(models.Model):
         help_text="Укажите связанную привычку",
         **NULLABLE,
     )
-    periodicity = models.CharField(
-        max_length=10,
-        choices=period,
-        default="daily",
+    periodicity = models.SmallIntegerField(
+        default=1,
         verbose_name="Периодичность выполнения привычки",
-        help_text="Укажите периодичность выполнения привычки",
+        help_text="Укажите периодичность от 1 до 7, где 1 - один раз в неделю, а 7 - это каждый день",
     )
     reward = models.CharField(
         max_length=200,

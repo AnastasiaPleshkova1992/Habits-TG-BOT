@@ -25,6 +25,7 @@ INSTALLED_APPS = [
     'rest_framework_simplejwt',
     'corsheaders',
     'drf_yasg',
+    'django_celery_beat',
 
     'users',
     'habits',
@@ -118,8 +119,23 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
 
+CELERY_BROKER_URL = os.getenv("CELERY_BROKER_URL")
+CELERY_RESULT_BACKEND = os.getenv("CELERY_RESULT_BACKEND")
+CELERY_TIMEZONE = TIME_ZONE
+CELERY_TASK_TRACK_STARTED = os.getenv("CELERY_TASK_TRACK_STARTED", False) == 'True'
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BEAT_SCHEDULER = 'django_celery_beat.schedulers:DatabaseScheduler'
+CELERY_BEAT_SCHEDULE = {
+    "send_remainder": {
+        "task": "habits.tasks.send_remainder",
+        "schedule": timedelta(minutes=1),
+    },
+}
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
 CORS_ALLOWED_ORIGINS = ['http://localhost:8000',]
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000',]
 CORS_ALLOW_ALL_ORIGINS = False
 
-TELEGRAM_API_KEY = os.getenv('TELEGRAM_API_KEY')
+TELEGRAM_TOKEN = os.getenv('TELEGRAM_TOKEN')
+TELEGRAM_URL = 'https://api.telegram.org/bot'

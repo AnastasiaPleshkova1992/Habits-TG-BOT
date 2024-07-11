@@ -27,7 +27,6 @@ class User(AbstractUser):
         verbose_name="ID чата в Телеграм",
         max_length=35,
         help_text="Укажите ID чата в Телеграм",
-        **NULLABLE
     )
 
     USERNAME_FIELD = "email"

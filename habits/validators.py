@@ -42,6 +42,17 @@ class CombinationValidator:
             )
 
 
+class PeriodicityValidator:
+    """Check performing the habit less than once every 7 days """
+
+    def __init__(self, periodicity):
+        self.periodicity = periodicity
+
+    def __call__(self, habit):
+        if habit.get(self.periodicity) and habit.get(self.periodicity) > 7:
+            raise ValidationError('Нельзя выполнять привычку реже, чем 1 раз в 7 дней.')
+
+
 class AbsenceValidator:
     """Validator that checks that a pleasant habit cannot have a reward or a related habit"""
     def __init__(self, reward, related_habit, pleasant_habit_sign):
