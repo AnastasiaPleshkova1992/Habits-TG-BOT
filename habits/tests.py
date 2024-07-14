@@ -17,7 +17,7 @@ class HabitTestCase(APITestCase):
             owner=self.user,
             action="Сделать зарядку",
             pleasant_habit_sign=True,
-            time="08:00",
+            time="2024-07-13T10:00:00Z",
             place="Дом",
         )
 
@@ -28,7 +28,7 @@ class HabitTestCase(APITestCase):
             "owner": self.user.pk,
             "action": "Убрать лишние вещи",
             "pleasant_habit_sign": True,
-            "time": "08:00",
+            "time": "2024-07-13T10:00:00Z",
             "place": "Дом",
         }
         response = self.client.post(url, data, format="json")
@@ -57,7 +57,7 @@ class HabitTestCase(APITestCase):
                     "pleasant_habit_sign": True,
                     "related_habit": None,
                     "reward": None,
-                    "time": "08:00:00",
+                    "time": "2024-07-13T10:00:00Z",
                 }
             ],
         }
